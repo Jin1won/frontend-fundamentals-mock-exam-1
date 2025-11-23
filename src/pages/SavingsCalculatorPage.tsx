@@ -1,18 +1,56 @@
 import ErrorFallback from 'components/ErrorFallback';
 import SavingsCalculatorContents from 'components/SavingsCalculatorContents';
-import SavingsCalculatorInputs from 'components/SavingsCalculatorInputs';
-import { Suspense } from 'react';
+import SavingsCalculatorInputs, { SavingsPeriod } from 'components/SavingsCalculatorInputs';
+import { ChangeEvent, Suspense, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Border, NavigationBar, Spacing } from 'tosslib';
+import { SavingsValues } from 'types/savings';
+import { parseNumberInput } from 'utils/parse/number';
 
 export function SavingsCalculatorPage() {
+  const [savingsValues, setSavingsValues] = useState<SavingsValues>({
+    targetAmount: 0,
+    monthlyPaymentAmount: 0,
+    savingsPeroid: 6,
+  });
+
+  const handleChangeTargetAmount = (e: ChangeEvent<HTMLInputElement>) => {
+    const newValue = parseNumberInput(e.target.value);
+
+    setSavingsValues(prev => ({
+      ...prev,
+      targetAmount: newValue,
+    }));
+  };
+
+  const handleChangeMountlyPaymentAmout = (e: ChangeEvent<HTMLInputElement>) => {
+    const newValue = parseNumberInput(e.target.value);
+
+    setSavingsValues(prev => ({
+      ...prev,
+      monthlyPaymentAmount: newValue,
+    }));
+  };
+
+  const handleChangeSavingsPeriod = (newValue: SavingsPeriod) => {
+    setSavingsValues(prev => ({
+      ...prev,
+      savingPeroid: newValue,
+    }));
+  };
+
   return (
     <>
       <NavigationBar title="적금 계산기" />
 
       <Spacing size={16} />
 
-      <SavingsCalculatorInputs />
+      <SavingsCalculatorInputs
+        savingsValues={savingsValues}
+        onChangeTargetAmount={handleChangeTargetAmount}
+        onChangeMountlyPaymentAmout={handleChangeMountlyPaymentAmout}
+        onChangeSavingsPeriod={handleChangeSavingsPeriod}
+      />
 
       <Spacing size={24} />
       <Border height={16} />

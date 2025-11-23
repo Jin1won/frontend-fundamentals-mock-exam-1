@@ -1,16 +1,54 @@
+import { ChangeEvent } from 'react';
 import { TextField, Spacing, SelectBottomSheet } from 'tosslib';
+import { SavingsValues } from 'types/savings';
+import { formatNumberWithComma } from 'utils/format/number';
 
-export default function SavingsCalculatorInputs() {
+const SAVINGS_PERIOD_OPTIONS = [6, 12, 18, 24] as const;
+export type SavingsPeriod = (typeof SAVINGS_PERIOD_OPTIONS)[number];
+
+interface SavingsCalculatorInputsProps {
+  savingsValues: SavingsValues;
+  onChangeTargetAmount: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeMountlyPaymentAmout: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeSavingsPeriod: (newValue: SavingsPeriod) => void;
+}
+
+export default function SavingsCalculatorInputs({
+  savingsValues,
+  onChangeTargetAmount,
+  onChangeMountlyPaymentAmout,
+  onChangeSavingsPeriod,
+}: SavingsCalculatorInputsProps) {
+  const { targetAmount, monthlyPaymentAmount, savingsPeroid } = savingsValues;
   return (
     <>
-      <TextField label="목표 금액" placeholder="목표 금액을 입력하세요" suffix="원" />
+      <TextField
+        label="목표 금액"
+        placeholder="목표 금액을 입력하세요"
+        suffix="원"
+        value={formatNumberWithComma(targetAmount)}
+        onChange={onChangeTargetAmount}
+      />
       <Spacing size={16} />
-      <TextField label="월 납입액" placeholder="희망 월 납입액을 입력하세요" suffix="원" />
+      <TextField
+        label="월 납입액"
+        placeholder="희망 월 납입액을 입력하세요"
+        suffix="원"
+        value={formatNumberWithComma(monthlyPaymentAmount)}
+        onChange={onChangeMountlyPaymentAmout}
+      />
       <Spacing size={16} />
-      <SelectBottomSheet label="저축 기간" title="저축 기간을 선택해주세요" value={12} onChange={() => {}}>
-        <SelectBottomSheet.Option value={6}>6개월</SelectBottomSheet.Option>
-        <SelectBottomSheet.Option value={12}>12개월</SelectBottomSheet.Option>
-        <SelectBottomSheet.Option value={24}>24개월</SelectBottomSheet.Option>
+      <SelectBottomSheet
+        label="저축 기간"
+        title="저축 기간을 선택해주세요"
+        value={savingsPeroid}
+        onChange={onChangeSavingsPeriod}
+      >
+        {SAVINGS_PERIOD_OPTIONS.map(period => (
+          <SelectBottomSheet.Option key={period} value={period}>
+            {period}개월
+          </SelectBottomSheet.Option>
+        ))}
       </SelectBottomSheet>
     </>
   );

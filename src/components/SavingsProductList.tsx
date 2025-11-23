@@ -1,6 +1,9 @@
+import { useSuspenseSavingsProducts } from 'hooks/useSuspenseSavingsProducts';
 import { ListRow, colors, Assets } from 'tosslib';
 
 export default function SavingsProductList() {
+  const { data: savingsProducts } = useSuspenseSavingsProducts();
+  console.log(savingsProducts);
   return (
     <>
       <ListRow

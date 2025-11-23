@@ -1,4 +1,5 @@
 import SavingsCalculatorContents from 'components/SavingsCalculatorContents';
+import { Suspense } from 'react';
 import { Border, NavigationBar, SelectBottomSheet, Spacing, TextField } from 'tosslib';
 
 export function SavingsCalculatorPage() {
@@ -22,7 +23,9 @@ export function SavingsCalculatorPage() {
       <Border height={16} />
       <Spacing size={8} />
 
-      <SavingsCalculatorContents />
+      <Suspense fallback={<div>로딩 중...</div>}>
+        <SavingsCalculatorContents />
+      </Suspense>
     </>
   );
 }

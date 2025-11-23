@@ -58,7 +58,7 @@ export function SavingsCalculatorPage() {
 
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <Suspense fallback={<div>로딩 중...</div>}>
-          <SavingsCalculatorContents />
+          <SavingsCalculatorContents savingsValues={savingsValues} />
         </Suspense>
       </ErrorBoundary>
     </>

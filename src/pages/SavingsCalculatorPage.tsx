@@ -1,5 +1,7 @@
+import ErrorFallback from 'components/ErrorFallback';
 import SavingsCalculatorContents from 'components/SavingsCalculatorContents';
 import { Suspense } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { Border, NavigationBar, SelectBottomSheet, Spacing, TextField } from 'tosslib';
 
 export function SavingsCalculatorPage() {
@@ -23,9 +25,11 @@ export function SavingsCalculatorPage() {
       <Border height={16} />
       <Spacing size={8} />
 
-      <Suspense fallback={<div>로딩 중...</div>}>
-        <SavingsCalculatorContents />
-      </Suspense>
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <Suspense fallback={<div>로딩 중...</div>}>
+          <SavingsCalculatorContents />
+        </Suspense>
+      </ErrorBoundary>
     </>
   );
 }

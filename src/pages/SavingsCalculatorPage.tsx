@@ -1,6 +1,6 @@
-import ErrorFallback from 'components/ErrorFallback';
-import SavingsCalculatorContents from 'components/SavingsCalculatorContents';
-import SavingsCalculatorInputs, { SavingsPeriod } from 'components/SavingsCalculatorInputs';
+import ErrorFallback from 'components/common/ErrorFallback';
+import SavingsCalculatorContents from 'components/SavingsCalculator/SavingsCalculatorContents';
+import SavingsCalculatorInputs, { SavingsPeriod } from 'components/SavingsCalculator/SavingsCalculatorInputs';
 import { ChangeEvent, Suspense, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Border, NavigationBar, Spacing } from 'tosslib';

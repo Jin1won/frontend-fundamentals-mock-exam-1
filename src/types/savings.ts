@@ -1,4 +1,4 @@
-import { SavingsPeriod } from 'components/SavingsCalculatorInputs';
+import { SavingsPeriod } from 'components/SavingsCalculator/SavingsCalculatorInputs';
 
 export interface SavingsValues {
   targetAmount: number;

@@ -1,4 +1,5 @@
 import ErrorFallback from 'components/common/ErrorFallback';
+import SuspenseFallback from 'components/common/SuspenseFallback';
 import Contents from 'components/SavingsCalculator/Contents';
 import Inputs, { SavingsPeriod } from 'components/SavingsCalculator/Inputs';
 import { ChangeEvent, Suspense, useState } from 'react';
@@ -57,7 +58,7 @@ export function SavingsCalculatorPage() {
       <Spacing size={8} />
 
       <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <Suspense fallback={<div>로딩 중...</div>}>
+        <Suspense fallback={<SuspenseFallback />}>
           <Contents savingsValues={savingsValues} />
         </Suspense>
       </ErrorBoundary>

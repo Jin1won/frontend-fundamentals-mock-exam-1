@@ -1,6 +1,6 @@
 import ErrorFallback from 'components/common/ErrorFallback';
-import SavingsCalculatorContents from 'components/SavingsCalculator/SavingsCalculatorContents';
-import SavingsCalculatorInputs, { SavingsPeriod } from 'components/SavingsCalculator/SavingsCalculatorInputs';
+import Contents from 'components/SavingsCalculator/Contents';
+import Inputs, { SavingsPeriod } from 'components/SavingsCalculator/Inputs';
 import { ChangeEvent, Suspense, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Border, NavigationBar, Spacing } from 'tosslib';
@@ -45,7 +45,7 @@ export function SavingsCalculatorPage() {
 
       <Spacing size={16} />
 
-      <SavingsCalculatorInputs
+      <Inputs
         savingsValues={savingsValues}
         onChangeTargetAmount={handleChangeTargetAmount}
         onChangeMountlyPaymentAmout={handleChangeMountlyPaymentAmout}
@@ -58,7 +58,7 @@ export function SavingsCalculatorPage() {
 
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <Suspense fallback={<div>로딩 중...</div>}>
-          <SavingsCalculatorContents savingsValues={savingsValues} />
+          <Contents savingsValues={savingsValues} />
         </Suspense>
       </ErrorBoundary>
     </>

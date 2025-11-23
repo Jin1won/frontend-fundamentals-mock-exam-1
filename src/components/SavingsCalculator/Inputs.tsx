@@ -6,19 +6,19 @@ import { formatNumberWithComma } from 'utils/format/number';
 const SAVINGS_PERIOD_OPTIONS = [6, 12, 18, 24] as const;
 export type SavingsPeriod = (typeof SAVINGS_PERIOD_OPTIONS)[number];
 
-interface SavingsCalculatorInputsProps {
+interface InputsProps {
   savingsValues: SavingsValues;
   onChangeTargetAmount: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeMountlyPaymentAmout: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeSavingsPeriod: (newValue: SavingsPeriod) => void;
 }
 
-export default function SavingsCalculatorInputs({
+export default function Inputs({
   savingsValues,
   onChangeTargetAmount,
   onChangeMountlyPaymentAmout,
   onChangeSavingsPeriod,
-}: SavingsCalculatorInputsProps) {
+}: InputsProps) {
   const { targetAmount, monthlyPaymentAmount, savingsPeriod } = savingsValues;
   return (
     <>

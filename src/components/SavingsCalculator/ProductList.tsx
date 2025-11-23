@@ -1,19 +1,19 @@
 import { SavingsProduct } from 'schemas/savingsProduct';
 import { ListRow, colors, Assets } from 'tosslib';
 
-interface SavingsProductListProps {
+interface ProductListProps {
   savingsProductList: SavingsProduct[];
   selectedSavingsProductId: string | null;
 
   changeSelectedSavingsProduct: (newValue: SavingsProduct) => void;
 }
 
-export default function SavingsProductList({
+export default function ProductList({
   savingsProductList,
   selectedSavingsProductId,
 
   changeSelectedSavingsProduct,
-}: SavingsProductListProps) {
+}: ProductListProps) {
   return (
     <>
       {savingsProductList.map(savingsProduct => (

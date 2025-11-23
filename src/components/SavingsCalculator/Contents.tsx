@@ -1,18 +1,18 @@
 import { Tab } from 'tosslib';
-import SavingsProductList from './SavingsProductList';
 import { SavingsValues } from 'types/savings';
 import { useMemo, useState } from 'react';
-import SavingsCalculatorResults from './SavingsCalculatorResult';
 import { useSuspenseSavingsProducts } from 'hooks/useSuspenseSavingsProducts';
 import { SavingsProduct } from 'schemas/savingsProduct';
+import ProductList from './ProductList';
+import Results from './Results';
 
 export type TabType = 'products' | 'results';
 
-interface SavingsCalculatorContentsProps {
+interface ContentsProps {
   savingsValues: SavingsValues;
 }
 
-export default function SavingsCalculatorContents({ savingsValues }: SavingsCalculatorContentsProps) {
+export default function Contents({ savingsValues }: ContentsProps) {
   const [selectedTab, setSelectedTab] = useState<TabType>('products');
   const [selectedSavingsProductId, setSelectedSavingsProductId] = useState<string | null>(null);
   const { data: savingsProducts } = useSuspenseSavingsProducts();
@@ -51,13 +51,13 @@ export default function SavingsCalculatorContents({ savingsValues }: SavingsCalc
         </Tab.Item>
       </Tab>
       {isProductsTab ? (
-        <SavingsProductList
+        <ProductList
           savingsProductList={filteredProductList}
           selectedSavingsProductId={selectedSavingsProductId}
           changeSelectedSavingsProduct={changeSelectedSavingsProduct}
         />
       ) : (
-        <SavingsCalculatorResults
+        <Results
           savingsValues={savingsValues}
           savingsProductList={filteredProductList}
           selectedSavingsProductId={selectedSavingsProductId}

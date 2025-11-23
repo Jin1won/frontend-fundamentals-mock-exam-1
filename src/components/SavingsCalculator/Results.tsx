@@ -4,17 +4,13 @@ import { SavingsValues } from 'types/savings';
 import { SavingsProduct } from 'schemas/savingsProduct';
 import RecommendedProductList from './RecommendedProductList';
 
-interface SavingsCalculatorResultsProps {
+interface ResultsProps {
   savingsValues: SavingsValues;
   savingsProductList: SavingsProduct[];
   selectedSavingsProductId: string | null;
 }
 
-export default function SavingsCalculatorResults({
-  savingsValues,
-  savingsProductList,
-  selectedSavingsProductId,
-}: SavingsCalculatorResultsProps) {
+export default function Results({ savingsValues, savingsProductList, selectedSavingsProductId }: ResultsProps) {
   return (
     <>
       <Spacing size={8} />

@@ -1,40 +1,39 @@
-import { useSuspenseSavingsProducts } from 'hooks/useSuspenseSavingsProducts';
+import { SavingsProduct } from 'schemas/savingsProduct';
 import { ListRow, colors, Assets } from 'tosslib';
 
-export default function SavingsProductList() {
-  const { data: savingsProducts } = useSuspenseSavingsProducts();
-  console.log(savingsProducts);
+interface SavingsProductListProps {
+  savingsProducts: SavingsProduct[];
+  selectedSavingsProductId: string | null;
+
+  changeSelectedSavingsProduct: (newValue: SavingsProduct) => void;
+}
+
+export default function SavingsProductList({
+  savingsProducts,
+  selectedSavingsProductId,
+
+  changeSelectedSavingsProduct,
+}: SavingsProductListProps) {
   return (
     <>
-      <ListRow
-        contents={
-          <ListRow.Texts
-            type="3RowTypeA"
-            top={'기본 정기적금'}
-            topProps={{ fontSize: 16, fontWeight: 'bold', color: colors.grey900 }}
-            middle={'연 이자율: 3.2%'}
-            middleProps={{ fontSize: 14, color: colors.blue600, fontWeight: 'medium' }}
-            bottom={'100,000원 ~ 500,000원 | 12개월'}
-            bottomProps={{ fontSize: 13, color: colors.grey600 }}
-          />
-        }
-        right={<Assets.Icon name="icon-check-circle-green" />}
-        onClick={() => {}}
-      />
-      <ListRow
-        contents={
-          <ListRow.Texts
-            type="3RowTypeA"
-            top={'고급 정기적금'}
-            topProps={{ fontSize: 16, fontWeight: 'bold', color: colors.grey900 }}
-            middle={'연 이자율: 2.8%'}
-            middleProps={{ fontSize: 14, color: colors.blue600, fontWeight: 'medium' }}
-            bottom={'50,000원 ~ 1,000,000원 | 24개월'}
-            bottomProps={{ fontSize: 13, color: colors.grey600 }}
-          />
-        }
-        onClick={() => {}}
-      />
+      {savingsProducts.map(savingsProduct => (
+        <ListRow
+          key={savingsProduct.id}
+          contents={
+            <ListRow.Texts
+              type="3RowTypeA"
+              top={savingsProduct.name}
+              topProps={{ fontSize: 16, fontWeight: 'bold', color: colors.grey900 }}
+              middle={`연 이자율: ${savingsProduct.annualRate}%`}
+              middleProps={{ fontSize: 14, color: colors.blue600, fontWeight: 'medium' }}
+              bottom={`${savingsProduct.minMonthlyAmount}원 ~ ${savingsProduct.maxMonthlyAmount}원 | ${savingsProduct.availableTerms}개월`}
+              bottomProps={{ fontSize: 13, color: colors.grey600 }}
+            />
+          }
+          right={savingsProduct.id === selectedSavingsProductId ? <Assets.Icon name="icon-check-circle-green" /> : null}
+          onClick={() => changeSelectedSavingsProduct(savingsProduct)}
+        />
+      ))}
     </>
   );
 }

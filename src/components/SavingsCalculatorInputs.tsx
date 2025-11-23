@@ -19,7 +19,7 @@ export default function SavingsCalculatorInputs({
   onChangeMountlyPaymentAmout,
   onChangeSavingsPeriod,
 }: SavingsCalculatorInputsProps) {
-  const { targetAmount, monthlyPaymentAmount, savingsPeroid } = savingsValues;
+  const { targetAmount, monthlyPaymentAmount, savingsPeriod } = savingsValues;
   return (
     <>
       <TextField
@@ -41,7 +41,7 @@ export default function SavingsCalculatorInputs({
       <SelectBottomSheet
         label="저축 기간"
         title="저축 기간을 선택해주세요"
-        value={savingsPeroid}
+        value={savingsPeriod}
         onChange={onChangeSavingsPeriod}
       >
         {SAVINGS_PERIOD_OPTIONS.map(period => (

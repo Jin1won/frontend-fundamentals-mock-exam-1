@@ -11,7 +11,7 @@ export function SavingsCalculatorPage() {
   const [savingsValues, setSavingsValues] = useState<SavingsValues>({
     targetAmount: 0,
     monthlyPaymentAmount: 0,
-    savingsPeroid: 6,
+    savingsPeriod: 6,
   });
 
   const handleChangeTargetAmount = (e: ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +35,7 @@ export function SavingsCalculatorPage() {
   const handleChangeSavingsPeriod = (newValue: SavingsPeriod) => {
     setSavingsValues(prev => ({
       ...prev,
-      savingPeroid: newValue,
+      savingsPeriod: newValue,
     }));
   };
 

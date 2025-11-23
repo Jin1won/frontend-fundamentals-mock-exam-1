@@ -87,7 +87,23 @@ savingsValues(목표 금액, 월 납입액, 저축 기간)와 selectedProductId�
 3. URL 파라미터로 저장
 4. 백엔드 DB에 저장
 
-### 3. 컴포넌트 추상화 수준
+### 3. Query Key 설계
+
+현재 Query Key를 단순하게 문자열 배열로 구성했습니다.
+
+```typescript
+queryKey: ['savingsProductList'];
+```
+
+Query Key를 어떻게 구조화하고 관리하는 것이 좋을지 궁금합니다.
+
+**고려 사항:**
+
+- Query Key 네이밍 컨벤션
+- Query Key 중복 방지 및 일관성 유지 방식
+- 필터링/페이지네이션 추가 시 Query Key 관리 방식
+
+### 4. 컴포넌트 추상화 수준
 
 - ProductList와 RecommendedProductList의 구조가 비슷한데, 추상화 할 가치가 있을지 궁금합니다.
 - Product가 ListRow 형태로 반복되는데, 추상화 할 가치가 있을지 궁금합니다.

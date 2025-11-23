@@ -16,7 +16,6 @@ export default function RecommendedProductList({ productList, selectedProductId 
           key={product.id}
           contents={
             <ListRow.Texts
-              key={product.id}
               type="3RowTypeA"
               top={product.name}
               topProps={{ fontSize: 16, fontWeight: 'bold', color: colors.grey900 }}

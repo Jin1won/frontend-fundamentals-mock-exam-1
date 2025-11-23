@@ -52,12 +52,16 @@ export default function SavingsCalculatorContents({ savingsValues }: SavingsCalc
       </Tab>
       {isProductsTab ? (
         <SavingsProductList
-          savingsProducts={filteredProductList}
+          savingsProductList={filteredProductList}
           selectedSavingsProductId={selectedSavingsProductId}
           changeSelectedSavingsProduct={changeSelectedSavingsProduct}
         />
       ) : (
-        <SavingsCalculatorResults />
+        <SavingsCalculatorResults
+          savingsValues={savingsValues}
+          savingsProductList={filteredProductList}
+          selectedSavingsProductId={selectedSavingsProductId}
+        />
       )}
     </>
   );

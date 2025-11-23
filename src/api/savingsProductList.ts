@@ -2,7 +2,7 @@ import { SavingsProduct, savingsProductSchema } from 'schemas/savingsProduct';
 import { http, isHttpError } from 'tosslib';
 import z from 'zod';
 
-export const getSavingsProducts = async (): Promise<SavingsProduct[]> => {
+export const getSavingsProductList = async (): Promise<SavingsProduct[]> => {
   try {
     const response = await http.get<SavingsProduct[]>('/api/savings-products');
 

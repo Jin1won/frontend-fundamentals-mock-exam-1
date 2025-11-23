@@ -2,36 +2,30 @@ import { SavingsProduct } from 'schemas/savingsProduct';
 import { ListRow, colors, Assets } from 'tosslib';
 
 interface ProductListProps {
-  savingsProductList: SavingsProduct[];
-  selectedSavingsProductId: string | null;
-
-  changeSelectedSavingsProduct: (newValue: SavingsProduct) => void;
+  productList: SavingsProduct[];
+  selectedProductId: string | null;
+  changeSelectedProduct: (newValue: SavingsProduct) => void;
 }
 
-export default function ProductList({
-  savingsProductList,
-  selectedSavingsProductId,
-
-  changeSelectedSavingsProduct,
-}: ProductListProps) {
+export default function ProductList({ productList, selectedProductId, changeSelectedProduct }: ProductListProps) {
   return (
     <>
-      {savingsProductList.map(savingsProduct => (
+      {productList.map(product => (
         <ListRow
-          key={savingsProduct.id}
+          key={product.id}
           contents={
             <ListRow.Texts
               type="3RowTypeA"
-              top={savingsProduct.name}
+              top={product.name}
               topProps={{ fontSize: 16, fontWeight: 'bold', color: colors.grey900 }}
-              middle={`연 이자율: ${savingsProduct.annualRate}%`}
+              middle={`연 이자율: ${product.annualRate}%`}
               middleProps={{ fontSize: 14, color: colors.blue600, fontWeight: 'medium' }}
-              bottom={`${savingsProduct.minMonthlyAmount}원 ~ ${savingsProduct.maxMonthlyAmount}원 | ${savingsProduct.availableTerms}개월`}
+              bottom={`${product.minMonthlyAmount}원 ~ ${product.maxMonthlyAmount}원 | ${product.availableTerms}개월`}
               bottomProps={{ fontSize: 13, color: colors.grey600 }}
             />
           }
-          right={savingsProduct.id === selectedSavingsProductId ? <Assets.Icon name="icon-check-circle-green" /> : null}
-          onClick={() => changeSelectedSavingsProduct(savingsProduct)}
+          right={product.id === selectedProductId ? <Assets.Icon name="icon-check-circle-green" /> : null}
+          onClick={() => changeSelectedProduct(product)}
         />
       ))}
     </>

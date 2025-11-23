@@ -1,7 +1,7 @@
 import { Tab } from 'tosslib';
 import { SavingsValues } from 'types/savings';
 import { useMemo, useState } from 'react';
-import { useSuspenseSavingsProducts } from 'hooks/useSuspenseSavingsProducts';
+import { useSuspenseSavingsProductList } from 'hooks/useSuspenseSavingsProductList';
 import { SavingsProduct } from 'schemas/savingsProduct';
 import ProductList from './ProductList';
 import Results from './Results';
@@ -14,20 +14,20 @@ interface ContentsProps {
 
 export default function Contents({ savingsValues }: ContentsProps) {
   const [selectedTab, setSelectedTab] = useState<TabType>('products');
-  const [selectedSavingsProductId, setSelectedSavingsProductId] = useState<string | null>(null);
-  const { data: savingsProducts } = useSuspenseSavingsProducts();
+  const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
+  const { data: products } = useSuspenseSavingsProductList();
 
   const { monthlyPaymentAmount, savingsPeriod } = savingsValues;
 
   const filteredProductList = useMemo(
     () =>
-      savingsProducts.filter(
+      products.filter(
         product =>
           product.minMonthlyAmount < monthlyPaymentAmount &&
           monthlyPaymentAmount < product.maxMonthlyAmount &&
           savingsPeriod === product.availableTerms
       ),
-    [savingsProducts, monthlyPaymentAmount, savingsPeriod]
+    [products, monthlyPaymentAmount, savingsPeriod]
   );
 
   const isProductsTab = selectedTab === 'products';
@@ -36,8 +36,8 @@ export default function Contents({ savingsValues }: ContentsProps) {
     setSelectedTab(newValue as TabType);
   };
 
-  const changeSelectedSavingsProduct = (newValue: SavingsProduct) => {
-    setSelectedSavingsProductId(newValue.id);
+  const changeSelectedProduct = (newValue: SavingsProduct) => {
+    setSelectedProductId(newValue.id);
   };
 
   return (
@@ -52,15 +52,15 @@ export default function Contents({ savingsValues }: ContentsProps) {
       </Tab>
       {isProductsTab ? (
         <ProductList
-          savingsProductList={filteredProductList}
-          selectedSavingsProductId={selectedSavingsProductId}
-          changeSelectedSavingsProduct={changeSelectedSavingsProduct}
+          productList={filteredProductList}
+          selectedProductId={selectedProductId}
+          changeSelectedProduct={changeSelectedProduct}
         />
       ) : (
         <Results
           savingsValues={savingsValues}
-          savingsProductList={filteredProductList}
-          selectedSavingsProductId={selectedSavingsProductId}
+          productList={filteredProductList}
+          selectedProductId={selectedProductId}
         />
       )}
     </>

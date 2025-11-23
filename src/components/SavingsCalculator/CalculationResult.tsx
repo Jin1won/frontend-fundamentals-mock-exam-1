@@ -6,16 +6,12 @@ import { formatNumberWithComma } from 'utils/format/number';
 
 interface CalculationResultProps {
   savingsValues: SavingsValues;
-  savingsProductList: SavingsProduct[];
-  selectedSavingsProductId: string | null;
+  productList: SavingsProduct[];
+  selectedProductId: string | null;
 }
 
-export default function CalculationResult({
-  savingsValues,
-  savingsProductList,
-  selectedSavingsProductId,
-}: CalculationResultProps) {
-  const selectedProduct = savingsProductList.find(product => product.id === selectedSavingsProductId);
+export default function CalculationResult({ savingsValues, productList, selectedProductId }: CalculationResultProps) {
+  const selectedProduct = productList.find(product => product.id === selectedProductId);
 
   if (!selectedProduct) {
     return <ListRow contents={<ListRow.Texts type="1RowTypeA" top="상품을 선택해주세요." />} />;

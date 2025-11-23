@@ -2,34 +2,31 @@ import { SavingsProduct } from 'schemas/savingsProduct';
 import { ListRow, colors, Assets } from 'tosslib';
 
 interface RecommendedProductListProps {
-  selectedSavingsProductId: string | null;
-  savingsProductList: SavingsProduct[];
+  productList: SavingsProduct[];
+  selectedProductId: string | null;
 }
 
-export default function RecommendedProductList({
-  selectedSavingsProductId,
-  savingsProductList,
-}: RecommendedProductListProps) {
-  const recommendedSavingsProductList = [...savingsProductList].sort((a, b) => b.annualRate - a.annualRate).slice(0, 2);
+export default function RecommendedProductList({ productList, selectedProductId }: RecommendedProductListProps) {
+  const recommendedProductList = [...productList].sort((a, b) => b.annualRate - a.annualRate).slice(0, 2);
 
   return (
     <>
-      {recommendedSavingsProductList.map(savingsProduct => (
+      {recommendedProductList.map(product => (
         <ListRow
-          key={savingsProduct.id}
+          key={product.id}
           contents={
             <ListRow.Texts
-              key={savingsProduct.id}
+              key={product.id}
               type="3RowTypeA"
-              top={savingsProduct.name}
+              top={product.name}
               topProps={{ fontSize: 16, fontWeight: 'bold', color: colors.grey900 }}
-              middle={`연 이자율: ${savingsProduct.annualRate}%`}
+              middle={`연 이자율: ${product.annualRate}%`}
               middleProps={{ fontSize: 14, color: colors.blue600, fontWeight: 'medium' }}
-              bottom={`${savingsProduct.minMonthlyAmount}원 ~ ${savingsProduct.maxMonthlyAmount}원 | ${savingsProduct.availableTerms}개월`}
+              bottom={`${product.minMonthlyAmount}원 ~ ${product.maxMonthlyAmount}원 | ${product.availableTerms}개월`}
               bottomProps={{ fontSize: 13, color: colors.grey600 }}
             />
           }
-          right={savingsProduct.id === selectedSavingsProductId ? <Assets.Icon name="icon-check-circle-green" /> : null}
+          right={product.id === selectedProductId ? <Assets.Icon name="icon-check-circle-green" /> : null}
         />
       ))}
     </>

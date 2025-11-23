@@ -6,19 +6,19 @@ import RecommendedProductList from './RecommendedProductList';
 
 interface ResultsProps {
   savingsValues: SavingsValues;
-  savingsProductList: SavingsProduct[];
-  selectedSavingsProductId: string | null;
+  productList: SavingsProduct[];
+  selectedProductId: string | null;
 }
 
-export default function Results({ savingsValues, savingsProductList, selectedSavingsProductId }: ResultsProps) {
+export default function Results({ savingsValues, productList, selectedProductId }: ResultsProps) {
   return (
     <>
       <Spacing size={8} />
 
       <CalculationResult
         savingsValues={savingsValues}
-        savingsProductList={savingsProductList}
-        selectedSavingsProductId={selectedSavingsProductId}
+        productList={productList}
+        selectedProductId={selectedProductId}
       />
 
       <Spacing size={8} />
@@ -28,10 +28,7 @@ export default function Results({ savingsValues, savingsProductList, selectedSav
       <ListHeader title={<ListHeader.TitleParagraph fontWeight="bold">추천 상품 목록</ListHeader.TitleParagraph>} />
       <Spacing size={12} />
 
-      <RecommendedProductList
-        selectedSavingsProductId={selectedSavingsProductId}
-        savingsProductList={savingsProductList}
-      />
+      <RecommendedProductList productList={productList} selectedProductId={selectedProductId} />
 
       <Spacing size={40} />
     </>
